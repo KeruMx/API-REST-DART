@@ -9,7 +9,7 @@ class ActivitiesController extends ResourceController{
     final resActivities = await activitiesQuery.fetch();
     return Response.ok(resActivities);
   }
-  @Operation.get('id_Actividad')
+  @Operation.get('idActividad')
   Future<Response> getActivityById(@Bind.path('idActividad') int idAct) async{
     final activitiesQuery = Query<Activities>(context)..where((a)=>a.idActividad).equalTo(idAct);
     final resActivities = await activitiesQuery.fetch();
