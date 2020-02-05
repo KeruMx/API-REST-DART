@@ -14,7 +14,7 @@ class ActivitiesController extends ResourceController{
     final activitiesQuery = Query<Activities>(context)..where((a)=>a.idActividad).equalTo(idAct);
     final resActivities = await activitiesQuery.fetch();
     if(resActivities == null)
-      return Response.notFound();
+      return  Response.notFound();
 
     return Response.ok(resActivities);
 
