@@ -1,5 +1,5 @@
 import 'package:api_moviles/api_moviles.dart';
-
+import 'package:api_moviles/model/Course.dart';
 class CourseController extends ResourceController{
   CourseController(this.context);
   final ManagedContext context;

@@ -1,5 +1,5 @@
 import 'package:api_moviles/api_moviles.dart';
-
+import 'package:api_moviles/model/Activities.dart';
 class ActivitiesController extends ResourceController{
   ActivitiesController(this.context);
   final ManagedContext context;
@@ -9,9 +9,9 @@ class ActivitiesController extends ResourceController{
     final resActivities = await activitiesQuery.fetch();
     return Response.ok(resActivities);
   }
-  @Operation.get('idActividad')
-  Future<Response> getActivityById(@Bind.path('idActividad') int idAct) async{
-    final activitiesQuery = Query<Activities>(context)..where((a)=>a.idActividad).equalTo(idAct);
+  @Operation.get('id')
+  Future<Response> getActivityById(@Bind.path('id') int idAct) async{
+    final activitiesQuery = Query<Activities>(context)..where((a)=> a.id).equalTo(idAct);
     final resActivities = await activitiesQuery.fetch();
     if(resActivities == null)
       return  Response.notFound();
@@ -27,15 +27,15 @@ class ActivitiesController extends ResourceController{
     return Response.ok(insActividad);
   }
   @Operation.put()
-  Future<Response> upActivity(@Bind.path('idActividad')int idAct) async{
+  Future<Response> upActivity(@Bind.path('id')int idAct) async{
     final objActividad = Activities()..read(await request.body.decode());
-    final queryActividad = Query<Activities>(context)..where((a)=> a.idActividad).equalTo(idAct)..values = objActividad;
+    final queryActividad = Query<Activities>(context)..where((a)=> a.id).equalTo(idAct)..values = objActividad;
     final upActividad  = await queryActividad.updateOne();
     return Response.ok(upActividad);
   }
   @Operation.delete()
-  Future<Response> delActivity(@Bind.path('idActividad')int idAct) async{
-    final queryActivity = Query<Activites>(context)..where((a)=> a.idActividad).equalTo(idAct);
+  Future<Response> delActivity(@Bind.path('id')int idAct) async{
+    final queryActivity = Query<Activities>(context)..where((a)=> a.id).equalTo(idAct);
     final delActividad = await queryActivity.delete();
     return Response.ok(delActividad);
   }

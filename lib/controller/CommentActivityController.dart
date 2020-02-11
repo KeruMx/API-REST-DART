@@ -1,5 +1,5 @@
 import 'package:api_moviles/api_moviles.dart';
-
+import 'package:api_moviles/model/CommentActivity.dart';
 class CommentActivityController extends ResourceController{
   CommentActivityController(this.context);
   final ManagedContext context;

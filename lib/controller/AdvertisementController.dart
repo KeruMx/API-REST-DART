@@ -1,5 +1,5 @@
 import 'package:api_moviles/api_moviles.dart';
-
+import 'package:api_moviles/model/Advertisement.dart';
 class AdvertisementController extends ResourceController{
   AdvertisementController(this.context);
   final ManagedContext context;
@@ -35,7 +35,7 @@ class AdvertisementController extends ResourceController{
   }
   @Operation.delete()
   Future<Response> delAdvertisement(@Bind.path('idAdvertisement')int idAdv) async{
-    final queryAdvertisement = Query<Activites>(context)..where((a)=> a.idAdvertisement).equalTo(idAdv);
+    final queryAdvertisement = Query<Advertisement>(context)..where((a)=> a.idAdvertisement).equalTo(idAdv);
     final delAdvertisement = await queryAdvertisement.delete();
     return Response.ok(delAdvertisement);
   }

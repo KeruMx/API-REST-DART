@@ -1,5 +1,5 @@
+import 'package:api_moviles/model/Users.dart';
 import 'api_moviles.dart';
-
 /// This type initializes an application.
 ///
 /// Override methods in this class to set up routes and initialize services like
@@ -11,18 +11,18 @@ class ApiMovilesChannel extends ApplicationChannel {
   /// and any other initialization required before constructing [entryPoint].
   ///
   /// This method is invoked prior to [entryPoint] being accessed.
+  ManagedContext context;
   @override
   Future prepare() async {
     logger.onRecord.listen((rec) => print("$rec ${rec.error ?? ""} ${rec.stackTrace ?? ""}"));
 
     final dataModel = ManagedDataModel.fromCurrentMirrorSystem();
-    final persistenStore = PostgreSQLPersistentStore.fromConnectionInfo("postgres", "p31n3t1n", "127.0.0.1", 5433, "epp_db");
+    final persistenStore = PostgreSQLPersistentStore.fromConnectionInfo("topicos_moviles", "1", "127.0.0.1", 5433, "LinClass");
     context = ManagedContext(dataModel,persistenStore);
-
-    final authStorage = ManagedAuthDelegate<Usuarios>(context);
-    authServer = AuthServer(authStorage);
+//
+//    final authStorage = ManagedAuthDelegate<Users>(context);
+//    authServer = AuthServer(authStorage);
   }
-
   /// Construct the request channel.
   ///
   /// Return an instance of some [Controller] that will be the initial receiver
@@ -40,6 +40,7 @@ class ApiMovilesChannel extends ApplicationChannel {
       .linkFunction((request) async {
         return Response.ok({"key": "value"});
       });
+    //aqui van las rutas prronas
 
     return router;
   }

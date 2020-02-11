@@ -1,5 +1,5 @@
 import 'package:api_moviles/api_moviles.dart';
-
+import 'package:api_moviles/model/Schedule.dart';
 class ScheduleController extends ResourceController{
   ScheduleController(this.context);
   final ManagedContext context;

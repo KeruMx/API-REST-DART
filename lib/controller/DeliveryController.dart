@@ -1,5 +1,5 @@
 import 'package:api_moviles/api_moviles.dart';
-
+import 'package:api_moviles/model/Delivery.dart';
 class DeliveryController extends ResourceController{
   DeliveryController(this.context);
   final ManagedContext context;
