@@ -6,14 +6,14 @@ class Delivery extends ManagedObject<tblDelivery> implements tblDelivery{}
 class tblDelivery{
 
   @Column(primaryKey: true)
-  int idDelivery;
+  int id;
 
   String file;
   DateTime datDelivery;
 
 
   @Relate(#fkstudent2)
-  Users idStudent;
+  User idStudent;
   @Relate(#fkactivities)
   Activities idActivity;
 }

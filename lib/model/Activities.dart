@@ -1,4 +1,5 @@
 import 'package:api_moviles/api_moviles.dart';
+import 'package:api_moviles/model/CommentActivity.dart';
 import 'package:api_moviles/model/Course.dart';
 import 'package:api_moviles/model/Delivery.dart';
 
@@ -16,5 +17,6 @@ class tblActivities{
   @Relate(#fkcourse2)
   Course idCourse;
 
-  ManagedObject<Delivery> fkactivities;
+  ManagedSet<Delivery> fkactivities;
+  ManagedSet<CommentActivity> idActivities;
 }

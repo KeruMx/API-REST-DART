@@ -5,10 +5,10 @@ class UserType extends ManagedObject<tblUserType> implements tblUserType{}
 class tblUserType{
 
   @Column(primaryKey: true)
-  int idUsersType;
+  int id;
 
-//  @Column(unique: true)
+  @Column(unique: true)
   String description;
 
-  ManagedObject<Users> fktypeuser;
+  ManagedSet<User> fktypeuser;
 }

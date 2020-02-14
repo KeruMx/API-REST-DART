@@ -4,42 +4,44 @@ import 'package:api_moviles/model/CommentAdvertisement.dart';
 class CommentAdvertisementController extends ResourceController{
   CommentAdvertisementController(this.context);
   final ManagedContext context;
+
   @Operation.get()
-  Future<Response> getCommentAdvertisement() async{
-    final commentAdvertisementQuery = Query<CommentAdvertisement>(context);
-    final resCommentAdvertisement = await commentAdvertisementQuery.fetch();
-    return Response.ok(resCommentAdvertisement);
+  Future<Response> getCommentActivity() async{
+    final query = Query<CommentAdvertisement>(context);
+    final res = await query.fetch();
+    return Response.ok(res);
   }
+
   @Operation.get('idCommentAdvertisement')
-  Future<Response> getAdvertisementById(@Bind.path('idCommentAdvertisement') int idCommAdv) async{
-    final commentAdvertisementQuery = Query<CommentAdvertisement>(context)..where((a)=>a.idCommentAdvertisement).equalTo(idCommAdv);
-    final resCommentAdvertisement = await commentAdvertisementQuery.fetch();
-    if(resCommentAdvertisement == null)
-      return  Response.notFound();
-
-    return Response.ok(resCommentAdvertisement);
-
+  Future<Response> getCommentAdvertisementById(@Bind.path('idCommentAdvertisement') int idAct) async{
+    final query = Query<CommentAdvertisement>(context)..where((a)=>a.id).equalTo(idAct);
+    final res = await query.fetch();
+    if(res==null){
+      return Response.notFound();
+    }
+    return Response.ok(res);
   }
+
   @Operation.post()
-  Future<Response> insCommentAdvertisement() async{
-    final objCommentAdvertisement = CommentAdvertisement()..read(await request.body.decode());
-    final query = Query<CommentAdvertisement>(context)..values = objCommentAdvertisement;
-    final insCommentAdvertisement = await query.insert();
-    return Response.ok(insCommentAdvertisement);
-  }
-  @Operation.put()
-  Future<Response> upCommentAdvertisement(@Bind.path('idCommentAdvertisement')int idCommAdv) async{
-    final objCommentAdvertisement = CommentAdvertisement()..read(await request.body.decode());
-    final queryCommentAdvertisement = Query<CommentAdvertisement>(context)..where((a)=> a.idCommentAdvertisement).equalTo(idCommAdv)..values = objCommentAdvertisement;
-    final upCommentAdvertisement  = await queryCommentAdvertisement.updateOne();
-    return Response.ok(upCommentAdvertisement);
-  }
-  @Operation.delete()
-  Future<Response> delCommentAdvertisement(@Bind.path('idCommentAdvertisement')int idCommAdv) async{
-    final queryAdvertisement = Query<CommentAdvertisement>(context)..where((a)=> a.idCommentAdvertisement).equalTo(idCommAdv);
-    final delCommentAdvertisement = await queryAdvertisement.delete();
-    return Response.ok(delCommentAdvertisement);
+  Future<Response> insertCommentAdvertisement() async{
+    final advertisement = CommentAdvertisement()..read(await request.body.decode());
+    final query = Query<CommentAdvertisement>(context)..values=advertisement;
+    final res = await query.insert();
+    return Response.ok(res);
   }
 
+  @Operation.put('idCommentAdvertisement')
+  Future<Response> updateCommentAdvertisement(@Bind.path('idCommentAdvertisement') int idAct) async{
+    final advertisement = CommentAdvertisement()..read(await request.body.decode());
+    final query = Query<CommentAdvertisement>(context)..where((a)=>a.id).equalTo(idAct)..values=advertisement;
+    final res = await query.updateOne();
+    return Response.ok(res);
+  }
 
+  @Operation.delete('idCommentAdvertisement')
+  Future<Response> deleteCommentAdvertisement(@Bind.path('idCommentAdvertisement') int idAct) async{
+    final query = Query<CommentAdvertisement>(context)..where((a)=>a.id).equalTo(idAct);
+    final res = await query.delete();
+    return Response.ok(res);
+  }
 }

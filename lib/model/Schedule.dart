@@ -6,10 +6,10 @@ class Schedule extends ManagedObject<tblSchedule> implements tblSchedule{}
 class tblSchedule{
 
   @Column(primaryKey: true)
-  int idSchedule;
+  int id;
 
   @Relate(#fkstudent)
-  Users idStudent;
+  User idStudent;
   @Relate(#fkcourse)
   Course idCourse;
 }

@@ -1,15 +1,16 @@
 import 'package:api_moviles/api_moviles.dart';
+import 'package:api_moviles/model/CommentActivity.dart';
 import 'package:api_moviles/model/UserType.dart';
 import 'package:api_moviles/model/Course.dart';
 import 'package:api_moviles/model/Schedule.dart';
 import 'package:api_moviles/model/Delivery.dart';
 import 'package:api_moviles/model/CommentAdvertisement.dart';
 
-class Users extends ManagedObject<tblUser> implements tblUser{}
+class User extends ManagedObject<tblUser> implements tblUser{}
 class tblUser{
 
   @Column(primaryKey: true)
-  int idUsers;
+  int id;
 
   String name;
   String lastName;
@@ -21,8 +22,9 @@ class tblUser{
   @Relate(#fktypeuser)
   UserType idType;
 
-  ManagedObject<Course> fkteacher;
-  ManagedObject<Schedule> fkstudent;
-  ManagedObject<Delivery> fkstudent2;
-  ManagedObject<CommentAdvertisement> fkuser;
+  ManagedSet<Course> fkteacher;
+  ManagedSet<Schedule> fkstudent;
+  ManagedSet<Delivery> fkstudent2;
+  ManagedSet<CommentActivity> fkuser2;
+  ManagedSet<CommentAdvertisement> fkuser;
 }

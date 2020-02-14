@@ -6,14 +6,14 @@ class CommentActivity extends ManagedObject<tblCommentActivity> implements tblCo
 class tblCommentActivity{
 
   @Column(primaryKey: true)
-  int idCommentActivity;
+  int id;
 
   String Comment;
   DateTime datComActivity;
 
 
-  @Relate(#fkAdvertisement)
-  Activities idAdvertisement;
+  @Relate(#idActivities)
+  Activities idActivity;
   @Relate(#fkuser2)
-  Users idUser;
+  User idUser;
 }

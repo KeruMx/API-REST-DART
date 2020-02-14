@@ -6,14 +6,14 @@ class CommentAdvertisement extends ManagedObject<tblCommentAdvertisement> implem
 class tblCommentAdvertisement{
 
   @Column(primaryKey: true)
-  int idCommentAdvertisement;
+  int id;
 
-  String Comment;
+  String comment;
   DateTime datComAdvertisement;
 
 
   @Relate(#fkAdvertisement)
   Advertisement idAdvertisement;
   @Relate(#fkuser)
-  Users idUser;
+  User idUser;
 }

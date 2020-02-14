@@ -6,7 +6,7 @@ class Advertisement extends ManagedObject<tblAdvertisement> implements tblAdvert
 class tblAdvertisement{
 
   @Column(primaryKey: true)
-  int idAdvertisement;
+  int id;
 
   String notice;
   DateTime datAdvertisement;

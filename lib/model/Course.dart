@@ -8,15 +8,15 @@ class Course extends ManagedObject<tblCourse> implements tblCourse{}
 class tblCourse{
 
   @Column(primaryKey: true)
-  int idCourse;
+  int id;
 
   String name;
   String description;
 
   @Relate(#fkteacher)
-  Users idTeacher;
+  User idTeacher;
 
-  ManagedObject<Schedule> fkcourse;
-  ManagedObject<Activities> fkcourse2;
-  ManagedObject<Advertisement> fkcourse3;
+  ManagedSet<Schedule> fkcourse;
+  ManagedSet<Activities> fkcourse2;
+  ManagedSet<Advertisement> fkcourse3;
 }
