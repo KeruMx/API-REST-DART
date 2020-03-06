@@ -5,7 +5,7 @@ import 'package:api_moviles/model/Activities.dart';
 class Delivery extends ManagedObject<tblDelivery> implements tblDelivery{}
 class tblDelivery{
 
-  @Column(primaryKey: true)
+  @primaryKey
   int id;
 
   String file;

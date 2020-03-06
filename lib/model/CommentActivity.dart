@@ -5,7 +5,7 @@ import 'package:api_moviles/model/Activities.dart';
 class CommentActivity extends ManagedObject<tblCommentActivity> implements tblCommentActivity{}
 class tblCommentActivity{
 
-  @Column(primaryKey: true)
+  @primaryKey
   int id;
 
   String Comment;

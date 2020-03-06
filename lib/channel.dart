@@ -1,3 +1,5 @@
+import 'package:aqueduct/managed_auth.dart';
+
 import 'api_moviles.dart';
 import 'controller/ActivitiesController.dart';
 import 'controller/AdvertisementController.dart';
@@ -8,6 +10,7 @@ import 'controller/DeliveryController.dart';
 import 'controller/ScheduleController.dart';
 import 'controller/UsersController.dart';
 import 'controller/UserTypeController.dart';
+import 'model/Users.dart';
 
 /// This type initializes an application.
 ///
@@ -17,6 +20,7 @@ class ApiMovilesChannel extends ApplicationChannel {
   /// Initialize services in this method.
   ///
   ManagedContext context;
+  AuthServer authServer;
   /// Implement this method to initialize services, read values from [options]
   /// and any other initialization required before constructing [entryPoint].
   ///
@@ -24,6 +28,12 @@ class ApiMovilesChannel extends ApplicationChannel {
   @override
   Future prepare() async {
     logger.onRecord.listen((rec) => print("$rec ${rec.error ?? ""} ${rec.stackTrace ?? ""}"));
+    final dataModel = ManagedDataModel.fromCurrentMirrorSystem();
+    final persistenStore = PostgreSQLPersistentStore.fromConnectionInfo("topicos_moviles", "1", "127.0.0.1", 5432, "linclass");
+
+    context = ManagedContext(dataModel,persistenStore);
+    final authStorage = ManagedAuthDelegate<User>(context);
+    authServer = AuthServer(authStorage);
   }
 
   /// Construct the request channel.
@@ -48,7 +58,7 @@ class ApiMovilesChannel extends ApplicationChannel {
     router.route("/courses[/:idCourse]").link(()=>CourseController(context));
     router.route("/deliveries[/:idDelivery]").link(()=>DeliveryController(context));
     router.route("/schedules[/:idSchedule]").link(()=>ScheduleController(context));
-    router.route("/users[/:idUser]").link(()=>UsersController(context));
+    router.route("/users[/:idUser]").link(()=>UsersController(context,authServer));
     router.route("/user_types[/:idUserType]").link(()=>UserTypeController(context));
 
     return router;

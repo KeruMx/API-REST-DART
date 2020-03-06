@@ -7,7 +7,7 @@ import 'package:api_moviles/model/Advertisement.dart';
 class Course extends ManagedObject<tblCourse> implements tblCourse{}
 class tblCourse{
 
-  @Column(primaryKey: true)
+  @primaryKey
   int id;
 
   String name;

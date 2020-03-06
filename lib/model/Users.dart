@@ -5,17 +5,21 @@ import 'package:api_moviles/model/Course.dart';
 import 'package:api_moviles/model/Schedule.dart';
 import 'package:api_moviles/model/Delivery.dart';
 import 'package:api_moviles/model/CommentAdvertisement.dart';
+import 'package:aqueduct/managed_auth.dart';
 
-class User extends ManagedObject<tblUser> implements tblUser{}
-class tblUser{
+class User extends ManagedObject<tblUser> implements tblUser, ManagedAuthResourceOwner<tblUser>{
+  @Serialize(input: true, output: false)
+  String password;
+}
+class tblUser extends ResourceOwnerTableDefinition{
 
-  @Column(primaryKey: true)
-  int id;
+//  @primaryKey
+//  int id;
 
   String name;
   String lastName;
   DateTime birDate;
-  String password;
+//  String password;
   @Column(unique: true)
   String email;
 

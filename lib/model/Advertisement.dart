@@ -5,7 +5,7 @@ import 'package:api_moviles/model/CommentAdvertisement.dart';
 class Advertisement extends ManagedObject<tblAdvertisement> implements tblAdvertisement{}
 class tblAdvertisement{
 
-  @Column(primaryKey: true)
+  @primaryKey
   int id;
 
   String notice;

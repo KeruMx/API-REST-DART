@@ -5,7 +5,7 @@ import 'package:api_moviles/model/Course.dart';
 class Schedule extends ManagedObject<tblSchedule> implements tblSchedule{}
 class tblSchedule{
 
-  @Column(primaryKey: true)
+  @primaryKey
   int id;
 
   @Relate(#fkstudent)
